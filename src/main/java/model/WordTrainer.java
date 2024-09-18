@@ -38,7 +38,7 @@ public class WordTrainer {
      */
     public WordTrainer(List<WordEntry> entries, int selected, int numAsked, int numRight) {
         setEntries(entries);
-        this.selected = selected;
+        selectEntry(selected);
         setNumAsked(numAsked);
         setNumRight(numRight);
     }
@@ -109,6 +109,7 @@ public class WordTrainer {
      * @return the selected entry
      */
     public WordEntry selectEntry(int index) {
+        if(index >= entries.size()) throw new IllegalArgumentException();
         this.selected = index;
         return getSelectedEntry();
     }
@@ -118,6 +119,7 @@ public class WordTrainer {
      * @return the selected entry
      */
     public WordEntry getSelectedEntry() {
+        if(this.selected < 0) return null;
         return this.entries.get(this.selected);
     }
 
@@ -127,6 +129,9 @@ public class WordTrainer {
      * @return true if the input is correct, false otherwise
      */
     public boolean check(String input) {
-        return getSelectedEntry().getWord().equals(input);
+        boolean correct = getSelectedEntry().getWord().equals(input);
+        if(correct) numRight++;
+        numAsked++;
+        return correct;
     }
 }

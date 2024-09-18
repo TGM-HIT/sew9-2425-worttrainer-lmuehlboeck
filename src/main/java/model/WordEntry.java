@@ -3,6 +3,7 @@ package model;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * Represents a word entry.
@@ -60,5 +61,18 @@ public class WordEntry {
             throw new IllegalArgumentException();
         }
         this.url = url;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WordEntry wordEntry = (WordEntry) o;
+        return Objects.equals(word, wordEntry.word) && Objects.equals(url, wordEntry.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(word, url);
     }
 }
