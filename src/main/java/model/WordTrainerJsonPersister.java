@@ -2,9 +2,13 @@ package model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.JsonReader;
 
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Represents a word trainer persister that saves and loads a word trainer to and from a JSON file.
@@ -40,8 +44,8 @@ public class WordTrainerJsonPersister implements WordTrainerPersister {
      */
     @Override
     public void save(WordTrainer trainer) {
-        try {
-            gson.toJson(trainer, new FileWriter(this.path));
+        try (PrintWriter writer = new PrintWriter(this.path)) {
+            gson.toJson(trainer, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -53,6 +57,11 @@ public class WordTrainerJsonPersister implements WordTrainerPersister {
      */
     @Override
     public WordTrainer load() {
-        return gson.fromJson(path, WordTrainer.class);
+        try {
+            JsonReader reader = new JsonReader(new FileReader(this.path));
+            return gson.fromJson(reader, WordTrainer.class);
+        } catch(JsonSyntaxException | FileNotFoundException e) {
+            return null;
+        }
     }
 }
