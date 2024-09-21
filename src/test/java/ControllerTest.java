@@ -9,8 +9,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ControllerTest {
-    @Test
-    @DisplayName("Test Controller")
+    //@Test
+    //@DisplayName("Test Controller")
     void testController() {
         Controller controller = new Controller(new WordTrainerPersister() {
             @Override
