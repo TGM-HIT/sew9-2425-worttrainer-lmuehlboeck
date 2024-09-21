@@ -94,7 +94,7 @@ public class View extends JFrame {
             URI u = new URI(url);
             Image img = ImageIO.read(u.toURL());
             lImage.setIcon(new ImageIcon(img));
-        } catch (IOException | URISyntaxException ignored) { }
+        } catch (IOException | URISyntaxException | NullPointerException ignored) { }
     }
 
     /**

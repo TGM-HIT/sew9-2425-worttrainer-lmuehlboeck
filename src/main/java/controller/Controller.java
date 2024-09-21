@@ -33,9 +33,13 @@ public class Controller {
         selectNewEntry();
     }
 
+    public WordTrainer _getTrainer() {
+        return trainer;
+    }
+
     /**
-     * Sets the view.
-     * @param view the view to set
+     * Checks the input.
+     * @param input the input to check
      */
     public void check(String input) {
         if(input.isEmpty()) return;
@@ -45,8 +49,7 @@ public class Controller {
     }
 
     /**
-     * Sets the view.
-     * @param view the view to set
+     * Selects a new entry.
      */
     public void selectNewEntry() {
         WordEntry entry = trainer.selectRandomEntry();
@@ -56,8 +59,7 @@ public class Controller {
     }
 
     /**
-     * Sets the view.
-     * @param view the view to set
+     * Saves the trainer.
      */
     public void save() {
         persister.save(trainer);
