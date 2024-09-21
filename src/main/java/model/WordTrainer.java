@@ -17,15 +17,19 @@ public class WordTrainer {
     /**
      * Default entries for the word trainer.
      */
-    public static final List<WordEntry> defaultEntries = Arrays.asList(
-            new WordEntry("Elefant", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Elephant_near_ndutu.jpg/640px-Elephant_near_ndutu.jpg")
+    public static final List<WordEntry> DEFAULT_ENTRIES = Arrays.asList(
+            new WordEntry("Elefant", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Elephant_near_ndutu.jpg/640px-Elephant_near_ndutu.jpg"),
+            new WordEntry("Hund", "https://upload.wikimedia.org/wikipedia/commons/4/42/Harzer_Fuchs_H%C3%BCndin_2.jpg"),
+            new WordEntry("Katze", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_March_2010-1.jpg/640px-Cat_March_2010-1.jpg"),
+            new WordEntry("Esel", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Donkey_in_Clovelly%2C_North_Devon%2C_England.jpg/300px-Donkey_in_Clovelly%2C_North_Devon%2C_England.jpg"),
+            new WordEntry("Ratte", "https://upload.wikimedia.org/wikipedia/commons/1/15/WildRat.jpg")
     );
 
     /**
      * Creates a new word trainer with the default entries.
      */
     public WordTrainer() {
-        this(defaultEntries, -1, 0, 0);
+        this(DEFAULT_ENTRIES, -1, 0, 0);
     }
 
     /**
