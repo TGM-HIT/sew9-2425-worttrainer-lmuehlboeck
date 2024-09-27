@@ -53,9 +53,9 @@ public class View extends JFrame {
 
         lNumAsked = new JLabel("0");
         lNumRight = new JLabel("0");
-        lLastResult = new JLabel("0");
+        lLastResult = new JLabel("-");
 
-        JPanel bottom = new JPanel(new GridLayout(2, 2, 5, 5));
+        JPanel bottom = new JPanel(new GridLayout(3, 2, 5, 5));
         bottom.add(lRight);
         bottom.add(lNumRight);
         bottom.add(lAsked);

@@ -43,9 +43,10 @@ public class Controller {
      */
     public void check(String input) {
         if(input.isEmpty()) return;
-        trainer.check(input);
+        boolean result = trainer.check(input);
         selectNewEntry();
         view.setNum(trainer.getNumAsked(), trainer.getNumRight());
+        view.setLastResult(result);
     }
 
     /**
