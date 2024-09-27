@@ -21,7 +21,7 @@ public class View extends JFrame {
     private final Controller controller;
 
     private final JTextField tfWord;
-    private final JLabel lImage, lNumRight, lNumAsked;
+    private final JLabel lImage, lNumRight, lNumAsked, lLastResult;
 
     /**
      * Creates a new View object.
@@ -49,15 +49,19 @@ public class View extends JFrame {
 
         JLabel lRight = new JLabel(new String("Anzahl richtige Wörter:".getBytes(), StandardCharsets.UTF_8), SwingConstants.RIGHT);
         JLabel lAsked = new JLabel(new String("Anzahl abefragte Wörter:".getBytes(), StandardCharsets.UTF_8), SwingConstants.RIGHT);
+        JLabel lResult = new JLabel(new String("Letztes Ergebnis:".getBytes(), StandardCharsets.UTF_8), SwingConstants.RIGHT);
 
         lNumAsked = new JLabel("0");
         lNumRight = new JLabel("0");
+        lLastResult = new JLabel("0");
 
         JPanel bottom = new JPanel(new GridLayout(2, 2, 5, 5));
         bottom.add(lRight);
         bottom.add(lNumRight);
         bottom.add(lAsked);
         bottom.add(lNumAsked);
+        bottom.add(lResult);
+        bottom.add(lLastResult);
 
         this.add(bottom, BorderLayout.PAGE_END);
 
@@ -103,5 +107,13 @@ public class View extends JFrame {
      */
     public void setInput(String input) {
         tfWord.setText(input);
+    }
+
+    /**
+     * Sets the last result.
+     * @param result the result to set
+     */
+    public void setLastResult(boolean result) {
+        lLastResult.setText(result ? "Richtig" : "Falsch");
     }
 }
