@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class WordTrainer {
      */
     public void setEntries(List<WordEntry> entries) {
         if(entries == null) throw new IllegalArgumentException();
-        this.entries = entries;
+        this.entries = new ArrayList<>(entries);
     }
 
     /**
