@@ -44,6 +44,7 @@ public class WordTrainerJsonPersister implements WordTrainerPersister {
      */
     @Override
     public void save(WordTrainer trainer) {
+        if(trainer == null) throw new IllegalArgumentException();
         try (PrintWriter writer = new PrintWriter(this.path)) {
             gson.toJson(trainer, writer);
         } catch (IOException e) {
