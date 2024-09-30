@@ -1,7 +1,4 @@
-import model.WordEntry;
-import model.WordTrainer;
-import model.WordTrainerJsonPersister;
-import model.WordTrainerPersister;
+import model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +33,39 @@ public class PersistenceTest {
         entries.add(entry2);
         WordTrainer trainer = new WordTrainer(entries, 0, 1, 1);
         WordTrainerPersister persister = new WordTrainerJsonPersister();
+        persister.save(trainer);
+        WordTrainer loadedTrainer = persister.load();
+        assertNotNull(loadedTrainer);
+        assertEquals(trainer.getEntries(), loadedTrainer.getEntries());
+        assertEquals(trainer.getSelectedEntry(), loadedTrainer.getSelectedEntry());
+        assertEquals(trainer.getNumAsked(), loadedTrainer.getNumAsked());
+        assertEquals(trainer.getNumRight(), loadedTrainer.getNumRight());
+    }
+
+    @Test
+    @DisplayName("Test XML save")
+    void testXMLSave() {
+        WordEntry entry1 = new WordEntry("test1", "http://example.com");
+        WordEntry entry2 = new WordEntry("test2", "http://example.com");
+        List<WordEntry> entries = new ArrayList<>();
+        entries.add(entry1);
+        entries.add(entry2);
+        WordTrainer trainer = new WordTrainer(entries, 0, 1, 1);
+        WordTrainerPersister persister = new WordTrainerXmlPersister("./word_trainer.xml");
+        persister.save(trainer);
+        assertTrue(new File("./word_trainer.xml").exists());
+    }
+
+    @Test
+    @DisplayName("Test XML save and load")
+    void testXMLSaveLoad() {
+        WordEntry entry1 = new WordEntry("test1", "http://example.com");
+        WordEntry entry2 = new WordEntry("test2", "http://example.com");
+        List<WordEntry> entries = new ArrayList<>();
+        entries.add(entry1);
+        entries.add(entry2);
+        WordTrainer trainer = new WordTrainer(entries, 0, 1, 1);
+        WordTrainerPersister persister = new WordTrainerXmlPersister();
         persister.save(trainer);
         WordTrainer loadedTrainer = persister.load();
         assertNotNull(loadedTrainer);
