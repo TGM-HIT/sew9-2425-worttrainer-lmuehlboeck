@@ -1,13 +1,19 @@
 package model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Represents a word trainer.
- * @author Leo MÜhlböck
- * @version 2024-09-18
+ * @author Leo Mühlböck, Benjamin Edlinger
+ * @version 2024-09-30
  */
+@XmlRootElement(name = "wordTrainer")
+@XmlType(propOrder = {"entries", "selected", "numAsked", "numRight"})
 public class WordTrainer {
     private List<WordEntry> entries;
     private int selected;
@@ -50,6 +56,8 @@ public class WordTrainer {
      * Returns the entries.
      * @return the entries
      */
+    @XmlElementWrapper(name = "entries")
+    @XmlElement(name = "entry")
     public List<WordEntry> getEntries() {
         return entries;
     }
@@ -67,6 +75,7 @@ public class WordTrainer {
      * Returns the number of asked entries.
      * @return the number of asked entries
      */
+    @XmlElement(name = "numAsked")
     public int getNumAsked() {
         return numAsked;
     }
@@ -84,6 +93,7 @@ public class WordTrainer {
      * Returns the number of right answers.
      * @return the number of right answers
      */
+    @XmlElement(name = "numRight")
     public int getNumRight() {
         return numRight;
     }
@@ -124,6 +134,26 @@ public class WordTrainer {
     public WordEntry getSelectedEntry() {
         if(this.selected < 0) return null;
         return this.entries.get(this.selected);
+    }
+
+    /**
+     * Sets the index of the selected entry.
+     * @param selected the index of the selected entry
+     */
+    public void setSelected(int selected) {
+        if (selected < 0 || selected >= entries.size()) {
+            throw new IllegalArgumentException();
+        }
+        this.selected = selected;
+    }
+
+    /**
+     * Returns the index of the selected entry.
+     * @return the index of the selected entry
+     */
+    @XmlElement(name = "selected")
+    public int getSelected() {
+        return selected;
     }
 
     /**
