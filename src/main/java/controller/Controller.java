@@ -5,8 +5,8 @@ import view.*;
 
 /**
  * Controller class for the WordTrainer application.
- * @author Leo Mühlböck
- * @version 2024-09-21
+ * @author Leo Mühlböck, Benjamin Edlinger
+ * @version 2024-09-30
  */
 public class Controller {
     private WordTrainerPersister persister;
@@ -27,8 +27,12 @@ public class Controller {
     public Controller(WordTrainerPersister persister) {
         if(persister == null) throw new IllegalArgumentException();
         this.persister = persister;
-        trainer = persister.load();
-        if(trainer == null) trainer = new WordTrainer();
+        try {
+            trainer = persister.load();
+            if (trainer == null) throw new Exception();
+        } catch(Exception e) {
+            trainer = new WordTrainer();
+        }
         view = new View(this);
         selectNewEntry();
     }
