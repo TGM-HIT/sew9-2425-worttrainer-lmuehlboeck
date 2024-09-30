@@ -1,5 +1,7 @@
 package model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -7,12 +9,21 @@ import java.util.Objects;
 
 /**
  * Represents a word entry.
- * @author Leo MÜhlböck
- * @version 2024-09-18
+ * @author Leo Mühlböck, Benjamin Edlinger
+ * @version 2024-09-30
  */
+@XmlRootElement(name = "entry")
 public class WordEntry {
     private String word;
     private String url;
+
+    /**
+     * Creates a new word entry with the default word and URL.
+     */
+    public WordEntry() {
+        setWord("Hund");
+        setUrl("https://upload.wikimedia.org/wikipedia/commons/4/42/Harzer_Fuchs_H%C3%BCndin_2.jpg");
+    }
 
     /**
      * Creates a new word entry with the given word and URL.
@@ -28,6 +39,7 @@ public class WordEntry {
      * Returns the word.
      * @return the word
      */
+    @XmlElement(name = "word")
     public String getWord() {
         return word;
     }
@@ -45,6 +57,7 @@ public class WordEntry {
      * Returns the URL.
      * @return the URL
      */
+    @XmlElement(name = "url")
     public String getUrl() {
         return url;
     }
